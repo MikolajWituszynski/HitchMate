@@ -1,4 +1,4 @@
-package com.example.HitchMate.security;
+package com.example.HitchMate.entity;
 
 import com.example.HitchMate.entity.User;
 import org.springframework.security.core.GrantedAuthority;

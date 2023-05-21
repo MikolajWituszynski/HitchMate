@@ -1,5 +1,6 @@
-package com.example.HitchMate.security;
+package com.example.HitchMate.services;
 
+import com.example.HitchMate.entity.CustomUserDetails;
 import com.example.HitchMate.entity.User;
 import com.example.HitchMate.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
