@@ -17,6 +17,10 @@ public class JwtUtils {
     @Value("${jwt.secret}")
     private String secret;
 
+    @Value("${jwt.expirationMs}")
+    private int jwtExpirationMs;
+
+
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }

@@ -19,6 +19,11 @@ public class CustomUserDetails implements UserDetails {
         return null;
     }
 
+
+    public Long getId() {
+        return 0L;
+    }
+
     @Override
     public String getPassword() {
         return null;
@@ -26,6 +31,10 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
+        return null;
+    }
+
+    public String getEmail() {
         return null;
     }
 

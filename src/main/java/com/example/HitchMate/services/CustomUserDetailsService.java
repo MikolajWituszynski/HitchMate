@@ -6,16 +6,19 @@ import com.example.HitchMate.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-
+@Service
 
 public class CustomUserDetailsService implements UserDetailsService {
 
     private UserRepository userRepository;
-    public CustomUserDetailsService() {
+
+    public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
 
     }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -27,4 +30,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         return new CustomUserDetails(user);
     }
+
+
 }
