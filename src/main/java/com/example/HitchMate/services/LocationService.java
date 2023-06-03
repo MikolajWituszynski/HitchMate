@@ -2,6 +2,7 @@ package com.example.HitchMate.services;
 
 import com.example.HitchMate.dto.LocationRequest;
 import com.example.HitchMate.entity.User;
+import com.example.HitchMate.exceptions.ResourceNotFoundException;
 import com.example.HitchMate.repository.LocationRepository;
 import com.example.HitchMate.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,21 @@ public class LocationService {
         return locationRepository.save(location);
     }
 
-    public void deleteLocation(Long id) {
-        locationRepository.deleteById(id);
+    public Location updateLocationFromRequest(Long locationId, LocationRequest request, User user) {
+        Location location = locationRepository.findById(locationId).orElseThrow(
+                () -> new ResourceNotFoundException("Location not found with id: " + locationId));
+        location.setLatitude(request.getLatitude());
+        location.setLongitude(request.getLongitude());
+        location.setUser(user);
+        return locationRepository.save(location);
     }
+
+    public void deleteLocation(Long id) {
+        if(locationRepository.existsById(id)) {
+            locationRepository.deleteById(id);
+        } else {
+            throw new ResourceNotFoundException("Location id: " +id);
+        }
+    }
+
 }
