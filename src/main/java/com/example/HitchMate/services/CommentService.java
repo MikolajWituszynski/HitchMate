@@ -1,6 +1,8 @@
 package com.example.HitchMate.services;
 
+import com.example.HitchMate.dto.CommentRequest;
 import com.example.HitchMate.entity.Comment;
+import com.example.HitchMate.exceptions.ResourceNotFoundException;
 import com.example.HitchMate.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +34,25 @@ public class CommentService {
         // Perform any necessary validation and transformations
         return commentRepository.save(comment);
     }
-
     public void deleteComment(Long id) {
         commentRepository.deleteById(id);
+    }
+
+
+    //request
+    public Comment updateCommentFromRequest(Long id, CommentRequest commentRequest) {
+        Comment comment = commentRepository.findById(id).orElseThrow(
+                () ->
+            new ResourceNotFoundException("Comment id: " + id));
+        comment.setContent(commentRequest.getContent());
+        comment.setLocation(commentRequest.getLocation());
+        return comment;
+    }
+
+    public Comment createCommentFromRequest(CommentRequest commentRequest) {
+        Comment comment = new Comment();
+        comment.setLocation(commentRequest.getLocation());
+        comment.setContent(commentRequest.getContent());
+        return comment;
     }
 }

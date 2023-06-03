@@ -25,17 +25,6 @@ public class LocationService {
         return locationRepository.save(location);
     }
 
-    public Location createLocationFromRequest(LocationRequest request) {
-        User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new RuntimeException("Error: User is not found."));
-
-        Location location = new Location();
-        location.setLatitude((int) request.getLatitude());
-        location.setLongitude((int) request.getLongitude());
-        location.setUser(user);
-
-        return location;
-    }
     public List<Location> getAllLocations() {
         return locationRepository.findAll();
     }
@@ -57,7 +46,17 @@ public class LocationService {
         location.setUser(user);
         return locationRepository.save(location);
     }
+    public Location createLocationFromRequest(LocationRequest request) {
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new RuntimeException("Error: User is not found."));
 
+        Location location = new Location();
+        location.setLatitude((int) request.getLatitude());
+        location.setLongitude((int) request.getLongitude());
+        location.setUser(user);
+
+        return location;
+    }
     public void deleteLocation(Long id) {
         if(locationRepository.existsById(id)) {
             locationRepository.deleteById(id);

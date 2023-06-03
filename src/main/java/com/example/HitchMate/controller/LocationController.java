@@ -49,7 +49,5 @@ public class LocationController {
     public ResponseEntity<Location> deleteLocation(@PathVariable Long id) {
         locationService.deleteLocation(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-
     }
-    
 }
