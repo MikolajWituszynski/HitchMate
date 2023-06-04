@@ -4,6 +4,7 @@ import com.example.HitchMate.dto.LoginRequest;
 import com.example.HitchMate.dto.SignupRequest;
 import com.example.HitchMate.entity.User;
 import com.example.HitchMate.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +17,7 @@ import java.util.List;
 @Service
 public class UserService {
     UserRepository userRepository;
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository) {
@@ -44,7 +46,7 @@ public class UserService {
         }
         User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(), passwordEncoder.encode(signUpRequest.getPassword()));
         userRepository.save(user);
-        return ResponseEntity.ok("User registered successfully!"))
+        return ResponseEntity.ok("User registered successfully!");
 
     }
 

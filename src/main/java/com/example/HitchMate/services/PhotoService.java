@@ -7,6 +7,7 @@ import com.example.HitchMate.entity.User;
 import com.example.HitchMate.exceptions.ResourceNotFoundException;
 import com.example.HitchMate.repository.PhotoRepository;
 import com.example.HitchMate.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,9 @@ import java.util.List;
 
 @Service
 public class PhotoService {
+    @Autowired
     private final PhotoRepository photoRepository;
+    @Autowired
     private  UserRepository userRepository;
 
     public PhotoService(PhotoRepository photoRepository) {

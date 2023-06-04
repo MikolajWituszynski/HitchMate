@@ -11,17 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
-
+@RestController
 public class LocationController {
 
     @Autowired
     private LocationService locationService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JwtUtils jwtUtils;
     @Autowired
     public LocationController(LocationService locationService) {
         this.locationService = locationService;
@@ -33,7 +28,7 @@ public class LocationController {
             return ResponseEntity.status(HttpStatus.CREATED).body(location);
     }
 
-    @GetMapping("locations/{id}")
+    @GetMapping("/locations/{id}")
     public ResponseEntity<Location> getLocation(@PathVariable Long id){
         Location location = locationService.getLocationById(id);
         return ResponseEntity.ok(location);
@@ -45,7 +40,7 @@ public class LocationController {
         return ResponseEntity.ok(location);
     }
 
-    @DeleteMapping("locations/{id}")
+    @DeleteMapping("/locations/{id}")
     public ResponseEntity<Location> deleteLocation(@PathVariable Long id) {
         locationService.deleteLocation(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

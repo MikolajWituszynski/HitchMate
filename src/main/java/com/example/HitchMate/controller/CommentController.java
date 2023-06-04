@@ -10,16 +10,13 @@ import com.example.HitchMate.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
-
+@RestController
 public class CommentController {
 
     @Autowired
     private CommentService commentService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -34,7 +31,7 @@ public class CommentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(comment);
     }
 
-    @GetMapping("comments/{id}")
+    @GetMapping("/comments/{id}")
     public ResponseEntity<Comment> getLocation(@PathVariable Long id){
         Comment comment = commentService.getCommentById(id);
         return ResponseEntity.ok(comment);
@@ -46,7 +43,7 @@ public class CommentController {
         return ResponseEntity.ok(comment);
     }
 
-    @DeleteMapping("locations/{id}")
+    @DeleteMapping("/comments/{id}")
     public ResponseEntity<Location> deleteLocation(@PathVariable Long id) {
         commentService.deleteComment(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
