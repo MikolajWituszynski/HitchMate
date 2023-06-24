@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService {
@@ -28,6 +29,10 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+    public User getUserByName(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
@@ -36,6 +41,10 @@ public class UserService {
         userRepository.save(user);
 
         return user;
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     public ResponseEntity<?> registerUser(SignupRequest signUpRequest) {
