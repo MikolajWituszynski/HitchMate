@@ -62,14 +62,13 @@ public class UserController {
             return ResponseEntity.notFound().build();
         } else {
             return ResponseEntity.ok(user);
-
         }
     }
 
     @GetMapping("/listOfUsers")
     public ResponseEntity<?> getUsers() {
        List<User> users = userService.getAllUsers();
-        if (users != null) {
+        if (users == null) {
             return ResponseEntity.notFound().build();
         } else {
             return ResponseEntity.ok(users);
