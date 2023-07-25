@@ -6,14 +6,13 @@ import com.example.HitchMate.dto.SignupRequest;
 import com.example.HitchMate.entity.CustomUserDetails;
 import com.example.HitchMate.entity.User;
 import com.example.HitchMate.security.JwtUtils;
-import com.example.HitchMate.services.UserService;
+import com.example.HitchMate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

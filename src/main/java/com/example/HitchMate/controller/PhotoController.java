@@ -3,11 +3,10 @@ package com.example.HitchMate.controller;
 import com.example.HitchMate.dto.PhotoRequest;
 import com.example.HitchMate.entity.Photo;
 import com.example.HitchMate.entity.User;
-import com.example.HitchMate.services.PhotoService;
+import com.example.HitchMate.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 @RestController
 public class PhotoController {

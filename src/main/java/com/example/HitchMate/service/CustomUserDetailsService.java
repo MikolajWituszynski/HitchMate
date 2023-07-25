@@ -1,4 +1,4 @@
-package com.example.HitchMate.services;
+package com.example.HitchMate.service;
 
 import com.example.HitchMate.entity.CustomUserDetails;
 import com.example.HitchMate.entity.User;

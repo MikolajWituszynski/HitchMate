@@ -1,12 +1,11 @@
 package com.example.HitchMate.controller;
 
 import com.example.HitchMate.dto.CommentRequest;
-import com.example.HitchMate.dto.LocationRequest;
 import com.example.HitchMate.entity.Comment;
 import com.example.HitchMate.entity.Location;
 import com.example.HitchMate.entity.User;
 import com.example.HitchMate.security.JwtUtils;
-import com.example.HitchMate.services.CommentService;
+import com.example.HitchMate.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

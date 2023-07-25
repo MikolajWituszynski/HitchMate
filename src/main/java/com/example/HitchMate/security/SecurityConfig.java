@@ -1,7 +1,6 @@
 package com.example.HitchMate.security;
 
-import com.example.HitchMate.services.CustomUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.HitchMate.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
