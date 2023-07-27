@@ -1,6 +1,6 @@
 package com.example.HitchMate.service;
 
-import com.example.HitchMate.dto.LocationRequest;
+import com.example.HitchMate.requests.LocationRequest;
 import com.example.HitchMate.entity.User;
 import com.example.HitchMate.exceptions.ResourceNotFoundException;
 import com.example.HitchMate.repository.LocationRepository;

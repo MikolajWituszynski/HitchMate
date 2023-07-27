@@ -1,6 +1,6 @@
 package com.example.HitchMate.service;
 
-import com.example.HitchMate.dto.SignupRequest;
+import com.example.HitchMate.requests.SignupRequest;
 import com.example.HitchMate.entity.User;
 import com.example.HitchMate.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

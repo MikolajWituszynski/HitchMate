@@ -1,8 +1,8 @@
 package com.example.HitchMate.controller;
 
-import com.example.HitchMate.dto.JwtResponse;
-import com.example.HitchMate.dto.LoginRequest;
-import com.example.HitchMate.dto.SignupRequest;
+import com.example.HitchMate.requests.JwtResponse;
+import com.example.HitchMate.requests.LoginRequest;
+import com.example.HitchMate.requests.SignupRequest;
 import com.example.HitchMate.entity.CustomUserDetails;
 import com.example.HitchMate.entity.User;
 import com.example.HitchMate.security.JwtUtils;

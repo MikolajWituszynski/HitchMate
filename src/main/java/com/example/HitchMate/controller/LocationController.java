@@ -1,6 +1,6 @@
 package com.example.HitchMate.controller;
 
-import com.example.HitchMate.dto.LocationRequest;
+import com.example.HitchMate.requests.LocationRequest;
 import com.example.HitchMate.entity.Location;
 import com.example.HitchMate.entity.User;
 import com.example.HitchMate.service.LocationService;

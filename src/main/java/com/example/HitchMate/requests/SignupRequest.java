@@ -1,4 +1,4 @@
-package com.example.HitchMate.dto;
+package com.example.HitchMate.requests;
 
 public class SignupRequest {
     private String username;

@@ -1,4 +1,4 @@
-package com.example.HitchMate.dto;
+package com.example.HitchMate.requests;
 
 import java.util.List;
 

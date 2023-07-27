@@ -1,6 +1,6 @@
 package com.example.HitchMate.service;
 
-import com.example.HitchMate.dto.CommentRequest;
+import com.example.HitchMate.requests.CommentRequest;
 import com.example.HitchMate.entity.Comment;
 import com.example.HitchMate.exceptions.ResourceNotFoundException;
 import com.example.HitchMate.repository.CommentRepository;

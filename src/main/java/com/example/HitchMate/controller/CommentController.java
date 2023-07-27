@@ -1,6 +1,6 @@
 package com.example.HitchMate.controller;
 
-import com.example.HitchMate.dto.CommentRequest;
+import com.example.HitchMate.requests.CommentRequest;
 import com.example.HitchMate.entity.Comment;
 import com.example.HitchMate.entity.Location;
 import com.example.HitchMate.entity.User;

@@ -1,7 +1,6 @@
-package com.example.HitchMate.dto;
+package com.example.HitchMate.requests;
 
 import com.example.HitchMate.entity.Location;
-import com.example.HitchMate.entity.User;
 
 import java.time.LocalDateTime;
 
