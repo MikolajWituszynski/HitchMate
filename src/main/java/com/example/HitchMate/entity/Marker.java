@@ -36,6 +36,10 @@ public class Marker {
 
     }
 
+    public Marker() {
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -56,6 +60,13 @@ public class Marker {
         return lng;
     }
 
+    public void setLat(float lat) {
+        this.lat = lat;
+    }
+
+    public void setLng(float lng) {
+        this.lng = lng;
+    }
 
     public void setTitle(String title) {
         this.title = title;

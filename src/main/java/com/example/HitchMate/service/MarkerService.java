@@ -41,4 +41,13 @@ public class MarkerService {
         marker.setDescription(description);
         return markerRepository.save(marker);
     }
+
+    public Marker createMarker(String title, String description, float lat, float lng) {
+        Marker marker = new Marker();
+        marker.setTitle(title);
+        marker.setDescription(description);
+        marker.setLat(lat);
+        marker.setLng(lng);
+        return markerRepository.save(marker);
+    }
 }
