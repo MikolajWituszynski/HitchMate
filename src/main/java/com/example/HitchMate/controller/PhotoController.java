@@ -1,8 +1,8 @@
 package com.example.HitchMate.controller;
 
-import com.example.HitchMate.requests.PhotoRequest;
 import com.example.HitchMate.entity.Photo;
 import com.example.HitchMate.entity.User;
+import com.example.HitchMate.requests.PhotoRequest;
 import com.example.HitchMate.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

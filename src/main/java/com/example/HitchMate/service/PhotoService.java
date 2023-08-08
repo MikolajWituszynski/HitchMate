@@ -1,11 +1,11 @@
 package com.example.HitchMate.service;
 
-import com.example.HitchMate.requests.PhotoRequest;
 import com.example.HitchMate.entity.Photo;
 import com.example.HitchMate.entity.User;
 import com.example.HitchMate.exceptions.ResourceNotFoundException;
 import com.example.HitchMate.repository.PhotoRepository;
 import com.example.HitchMate.repository.UserRepository;
+import com.example.HitchMate.requests.PhotoRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

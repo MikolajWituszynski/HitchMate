@@ -39,7 +39,7 @@ public class LocationService {
 
     public Location updateLocationFromRequest(Long locationId, LocationRequest request, User user) {
         Location location = locationRepository.findById(locationId).orElseThrow(
-                () -> new ResourceNotFoundException("Location not found with id: " + locationId));
+                () -> new ResourceNotFoundException("Location nchatGPTot found with id: " + locationId));
         location.setLatitude(request.getLatitude());
         location.setLongitude(request.getLongitude());
         location.setUser(user);
