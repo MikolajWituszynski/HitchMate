@@ -1,12 +1,12 @@
 package com.example.HitchMate.service;
 
-import com.example.HitchMate.entity.Location;
 import com.example.HitchMate.entity.Marker;
 import com.example.HitchMate.exceptions.ResourceNotFoundException;
-import com.example.HitchMate.repository.LocationRepository;
 import com.example.HitchMate.repository.MarkerRepository;
 import com.example.HitchMate.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class MarkerService {
@@ -21,12 +21,13 @@ public class MarkerService {
         return markerRepository.save(marker);
     }
 
-    public void deleteMarker(Long id) {
+    public Marker deleteMarker(Long id) {
         if(markerRepository.existsById(id)) {
             markerRepository.deleteById(id);
         } else {
             throw new ResourceNotFoundException("Marker with id " + id + "does not exits");
         }
+        return null;
     }
 
     public Marker getMarkerById(Long id) {
@@ -42,12 +43,10 @@ public class MarkerService {
         return markerRepository.save(marker);
     }
 
-    public Marker createMarker(String title, String description, float lat, float lng) {
-        Marker marker = new Marker();
-        marker.setTitle(title);
-        marker.setDescription(description);
-        marker.setLat(lat);
-        marker.setLng(lng);
-        return markerRepository.save(marker);
+
+    public List<Marker> getAllMarkers() {
+        return markerRepository.findAll();
     }
+
+
 }
