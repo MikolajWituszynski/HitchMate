@@ -37,7 +37,9 @@ public class MarkerController {
     }
 
     @PutMapping("/markers/{id}")
-        public ResponseEntity<Marker> updateMarker(@PathVariable Long id, String title, String description) {
+        public ResponseEntity<Marker> updateMarker(@PathVariable Long id,
+                                                   @RequestParam String title,
+                                                   @RequestParam String description) {
         Marker marker = markerService.updateMarker(id,title,description);
         return ResponseEntity.ok(marker);
     }

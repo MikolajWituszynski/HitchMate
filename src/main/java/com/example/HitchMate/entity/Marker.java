@@ -9,16 +9,16 @@ public class Marker {
     @Id
     private Long id;
 
-    @Column(name="Title", length=20, nullable=false, unique = false)
+    @Column(name="Title", length=20,unique = false)
     private String title;
 
-    @Column(name="Description", length=50, nullable=false, unique = false)
+    @Column(name="Description", length=50, unique = false)
     private String description;
 
-    @Column(name="latitude", length=20, nullable=false, unique = false)
+    @Column(name="latitude", length=20,  unique = false)
     private float lat;
 
-    @Column(name="longitude", length=20, nullable=false, unique = false)
+    @Column(name="longitude", length=20,  unique = false)
     private float lng;
 
     public Marker(Long id, String title, String description, float lat, float lng) {
