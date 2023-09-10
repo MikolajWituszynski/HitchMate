@@ -1,6 +1,6 @@
 package com.example.HitchMate;
 
-import org.apache.coyote.Response;
+import com.example.HitchMate.Entity.Marker;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,5 +19,12 @@ class HitchMateApplicationTests {
     void shouldReturnAMarkerDataWhenDataIsSaved() {
         ResponseEntity<String> response = restTemplate.getForEntity("/markers",String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
+    @Test
+    void shouldCreateAMarkerWhenDataIsSend() {
+        Marker newMarker = new Marker(null, 12.00,12.00,"mikolaj");
+        ResponseEntity<Void> response = restTemplate.postForEntity("/markers", newMarker, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 }
