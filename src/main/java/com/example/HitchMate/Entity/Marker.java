@@ -16,18 +16,26 @@ public class Marker {
 
     @Column(name = "description")
     private String description;
-    @Column(name = "owner")
-    private String owner;
 
-    public Marker(Long id, Double lat, Double lng, String owner) {
+    @Column(name="ownBy")
+    private String ownBy;
+
+    public Marker(Long id, Double lat, Double lng, String description,String ownBy) {
         this.id = id;
         this.lat = lat;
         this.lng = lng;
-        this.owner = owner;
+        this.description = description;
+        this.ownBy = ownBy;
+
+
     }
 
     public Marker() {
 
+    }
+
+    public String getOwner() {
+        return ownBy;
     }
 
     public Long getId() {
@@ -60,13 +68,5 @@ public class Marker {
 
     public void setLng(Double lng) {
         this.lng = lng;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
     }
 }

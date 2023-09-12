@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5332/hitchhikers
+    username: meek
+    password: password
+  jpa:
+    hibernate:
+        ddl-auto: create-drop
+    properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+jwt:
+  secret: 1Gd#21
+  expirationMs: 3600000  # JWT expiration time in milliseconds (this is 1 hour)
+
+  main:
+    web-application-type: servlet
