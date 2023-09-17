@@ -22,6 +22,8 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,6 +36,7 @@ class HitchMateApplicationTests {
     TestRestTemplate restTemplate;
 
     @Test
+    @DirtiesContext
     void shouldReturnAMarkerDataWhenDataIsSaved() {
         ResponseEntity<String> response = restTemplate.withBasicAuth("sarah1","abc123").getForEntity("/markers/2",String.class);
         System.out.println(response.getBody());
@@ -54,6 +57,7 @@ class HitchMateApplicationTests {
     }
 
     @Test
+    @DirtiesContext
     void shouldReturnAllMarkers() {
         ResponseEntity<String> response = restTemplate.withBasicAuth("sarah1","abc123").getForEntity("/markers",String.class);
         System.out.println(response.getBody());
@@ -64,8 +68,16 @@ class HitchMateApplicationTests {
     @Test
     @DirtiesContext
     void shouldCreateAMarkerWhenDataIsSend() {
-        Marker newMarker = new Marker((Long) null,"Las Palmas", 12.00,12.00,"test",new User(3L, "test1","test1","asd@asd.com",null,null));
-        ResponseEntity<Void> createResponse = restTemplate.withBasicAuth("test1","test1").postForEntity("/markers", newMarker, Void.class);
+        List<Marker> markers = new ArrayList<>();
+        Marker newMarker = new Marker();
+        newMarker.setId(55L);
+        newMarker.setTitle("Las Palmas");
+        newMarker.setLat(12.00);
+        newMarker.setLng(12.00);
+        newMarker.setInfo("test");
+        markers.add(newMarker);
+        newMarker.setUser(new User(666L, "test1", "test1", "asd@asd.com", markers, null));
+        ResponseEntity<Void> createResponse = restTemplate.withBasicAuth("sarah1","abc123").postForEntity("/markers", newMarker, Void.class);
         assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
         URI locationOfNewMarker = createResponse.getHeaders().getLocation();

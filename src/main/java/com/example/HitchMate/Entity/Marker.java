@@ -24,7 +24,7 @@ public class Marker {
     private String info;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="user_id" , referencedColumnName = "id")
     private User user;
 
     @OneToMany(mappedBy = "marker", cascade = CascadeType.ALL)
@@ -52,7 +52,25 @@ public class Marker {
         return title;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public Long getId() {
         return id;

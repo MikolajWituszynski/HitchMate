@@ -19,11 +19,11 @@ public class Comment {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="marker_id")
+    @JoinColumn(name="marker_id", referencedColumnName = "id")
     private Marker marker;
 
     public Long getComment_id() {
