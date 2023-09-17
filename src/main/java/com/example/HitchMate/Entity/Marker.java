@@ -2,6 +2,9 @@ package com.example.HitchMate.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name="markers")
 public class Marker {
@@ -9,24 +12,35 @@ public class Marker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "latitude")
+
+    @Column(name = "title")
+    private String title;
+    @Column(name = "lat")
     private Double lat;
-    @Column(name = "longitute")
+    @Column(name = "lng")
     private Double lng;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "info")
+    private String info;
 
-    @Column(name="ownBy")
-    private String ownBy;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    private User user;
 
-    public Marker(Long id, Double lat, Double lng, String description,String ownBy) {
+    @OneToMany(mappedBy = "marker", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
+
+
+
+
+
+    public Marker(Long id,String title, Double lat, Double lng, String info,User user) {
         this.id = id;
+        this.title = title;
         this.lat = lat;
         this.lng = lng;
-        this.description = description;
-        this.ownBy = ownBy;
-
+        this.info = info;
+        this.user = user;
 
     }
 
@@ -34,17 +48,16 @@ public class Marker {
 
     }
 
-    public String getOwner() {
-        return ownBy;
+    public String getTitle() {
+        return title;
     }
+
+
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Double getLat() {
         return lat;
@@ -54,13 +67,10 @@ public class Marker {
         this.lat = lat;
     }
 
-    public String getDescription() {
-        return description;
+    public String getInfo() {
+        return info;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public Double getLng() {
         return lng;

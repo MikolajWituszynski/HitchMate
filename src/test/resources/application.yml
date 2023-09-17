@@ -1,9 +1,24 @@
+
+server:
+  port: 8080
+
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
     driverClassName: org.h2.Driver
     username: sa
     password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
   h2:
     console:
       enabled: true
+      settings:
+         web-allow-others: true
+
+    logging:
+      level:
+        org:
+          hibernate:
+            sql: info

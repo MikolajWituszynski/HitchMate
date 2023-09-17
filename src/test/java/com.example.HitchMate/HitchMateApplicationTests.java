@@ -2,10 +2,12 @@ package com.example.HitchMate;
 
 import com.example.HitchMate.Entity.Marker;
 
+import com.example.HitchMate.Entity.User;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -15,12 +17,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URI;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Sql(scripts = "/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 class HitchMateApplicationTests {
 
     @Autowired
@@ -58,8 +65,8 @@ class HitchMateApplicationTests {
     @Test
     @DirtiesContext
     void shouldCreateAMarkerWhenDataIsSend() {
-        Marker newMarker = new Marker((Long) null, 12.00,12.00,"test","sarah1");
-        ResponseEntity<Void> createResponse = restTemplate.withBasicAuth("sarah1","abc123").postForEntity("/markers", newMarker, Void.class);
+        Marker newMarker = new Marker((Long) null,"Las Palmas", 12.00,12.00,"test",new User(3L, "test1","test1","asd@asd.com",null,null));
+        ResponseEntity<Void> createResponse = restTemplate.withBasicAuth("test1","test1").postForEntity("/markers", newMarker, Void.class);
         assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
         URI locationOfNewMarker = createResponse.getHeaders().getLocation();
@@ -70,8 +77,12 @@ class HitchMateApplicationTests {
 
         DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
         Number id = documentContext.read("$.id");
+        String title = documentContext.read("$.title");
         Double lat = documentContext.read("$.lat");
         Double lng = documentContext.read("$.lng");
+        String info = documentContext.read("$.info");
+        User user = documentContext.read("$.user_id");
+
 
         assertThat(id).isNotNull();
         assertThat(lat).isEqualTo(250.00);

@@ -21,10 +21,11 @@ public class MarkerController {
             this.markerRepository = markerRepository;
         }
     @GetMapping("/{requestedId}")
-    ResponseEntity<Marker> findById(@PathVariable Long requestedId, Principal principal) {
-        Marker marker = markerRepository.findByIdAndOwnBy(requestedId, principal.getName());
-        if(marker != null) {
-            return ResponseEntity.ok(marker);
+    ResponseEntity<Optional<Marker>> findById(@PathVariable Long requestedId) {
+        Optional<Marker> optionalMarker = markerRepository.findById(requestedId);
+        if(optionalMarker.isPresent()) {
+
+            return ResponseEntity.ok(optionalMarker);
         }
         return ResponseEntity.notFound().build();
     }
