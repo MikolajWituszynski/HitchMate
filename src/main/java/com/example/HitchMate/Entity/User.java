@@ -39,6 +39,10 @@ public class User {
         this.comments = comments;
     }
 
+    public User() {
+
+    }
+
     public Long getUser_id() {
         return id;
     }

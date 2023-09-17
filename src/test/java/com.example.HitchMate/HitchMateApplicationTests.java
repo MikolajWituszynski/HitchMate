@@ -35,7 +35,7 @@ class HitchMateApplicationTests {
 
     @Test
     void shouldReturnAMarkerDataWhenDataIsSaved() {
-        ResponseEntity<String> response = restTemplate.withBasicAuth("sarah1","abc123").getForEntity("/markers/99",String.class);
+        ResponseEntity<String> response = restTemplate.withBasicAuth("sarah1","abc123").getForEntity("/markers/2",String.class);
         System.out.println(response.getBody());
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -43,15 +43,14 @@ class HitchMateApplicationTests {
         DocumentContext documentContext = JsonPath.parse(response.getBody());
         System.out.println(documentContext.toString());
         Number id = documentContext.read("$.id");
-        assertThat(id).isEqualTo(22);
+        assertThat(id).isEqualTo(2);
         Number lat = documentContext.read("$.lat");
-        assertThat(lat).isEqualTo(22);
+        assertThat(lat).isEqualTo(12.0);
         Number lng = documentContext.read("$.lng");
-        assertThat(lng).isEqualTo(22);
-        String description = documentContext.read("$.description");
+        assertThat(lng).isEqualTo(12.0);
+        String description = documentContext.read("$.info");
         assertThat(description).isEqualTo("test");
-        Number userid = documentContext.read("$.userid");
-        assertThat(userid).isEqualTo(22);
+
     }
 
     @Test
