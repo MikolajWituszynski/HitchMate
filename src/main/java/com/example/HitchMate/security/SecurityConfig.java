@@ -1,5 +1,6 @@
 package com.example.HitchMate.security;
 
+import com.example.HitchMate.services.MyDBUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +20,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
-                .requestMatchers("/markers/**")
+                .requestMatchers("/markers/**","/users/**")
                 .hasRole("MARKER-OWNER")
                 .and()
                 .csrf().disable()
@@ -32,21 +33,13 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+
+
     @Bean
-    public UserDetailsService testOnlyUsers(PasswordEncoder passwordEncoder) {
-        User.UserBuilder users = User.builder();
-        UserDetails sarah = users
-                .username("sarah1")
-                .password(passwordEncoder.encode("abc123"))
-                .roles("MARKER-OWNER") // new role
-                .build();
-        UserDetails hankOwnsNoCards = users
-                .username("hank-owns-no-cards")
-                .password(passwordEncoder.encode("qrs456"))
-                .roles("NON-OWNER") // new role
-                .build();
-        return new InMemoryUserDetailsManager(sarah, hankOwnsNoCards);
+    public UserDetailsService userDetailsService() {
+        return new MyDBUserDetailsService(); // (1)
     }
+
 
 
 

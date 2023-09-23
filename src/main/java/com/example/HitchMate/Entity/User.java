@@ -24,17 +24,21 @@ public class User {
     @Column(name="email")
     private String email;
 
+    @Column(name="roles")
+    private List<String> roles;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Marker> markers = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Comment> comments = new ArrayList<>();
 
-    public User(Long id, String username, String password, String email, List<Marker> markers, List<Comment> comments) {
+    public User(Long id, String username, String password, String email,List<String> roles, List<Marker> markers, List<Comment> comments) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.roles = roles;
         this.markers = markers;
         this.comments = comments;
     }
@@ -43,8 +47,12 @@ public class User {
 
     }
 
-    public Long getUser_id() {
+    public Long getId() {
         return id;
+    }
+
+    public List<String> getRoles() {
+        return roles;
     }
 
     public String getUsername() {

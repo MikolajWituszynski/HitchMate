@@ -23,13 +23,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Sql(scripts = "/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+//@Sql(scripts = "/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 class HitchMateApplicationTests {
 
     @Autowired
@@ -69,20 +70,24 @@ class HitchMateApplicationTests {
     @DirtiesContext
     void shouldCreateAMarkerWhenDataIsSend() {
         List<Marker> markers = new ArrayList<>();
-        Marker newMarker = new Marker();
-        newMarker.setId(55L);
-        newMarker.setTitle("Las Palmas");
-        newMarker.setLat(12.00);
-        newMarker.setLng(12.00);
-        newMarker.setInfo("test");
-        markers.add(newMarker);
-        newMarker.setUser(new User(666L, "test1", "test1", "asd@asd.com", markers, null));
-        ResponseEntity<Void> createResponse = restTemplate.withBasicAuth("sarah1","abc123").postForEntity("/markers", newMarker, Void.class);
+
+        User newUser = new User(null, "hank","abc123","test@test.pl", List.of("MARKER-OWNER"),null, null);
+
+
+        ResponseEntity<Void> createResponseForUser = restTemplate.withBasicAuth("hank","abc123").postForEntity("/users", newUser, Void.class);
+        System.out.println(createResponseForUser);
+        assertThat(createResponseForUser.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+
+
+        Marker newMarker = new Marker(null, "test", 4.0,5.0, "test",
+                newUser);
+
+        ResponseEntity<Void> createResponse = restTemplate.withBasicAuth("hank","abc123").postForEntity("/markers", newMarker, Void.class);
         assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
         URI locationOfNewMarker = createResponse.getHeaders().getLocation();
         ResponseEntity<String> getResponse = restTemplate
-                .withBasicAuth("sarah1", "abc123")
+                .withBasicAuth("hank", "abc123")
                 .getForEntity(locationOfNewMarker, String.class);
         assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
 
