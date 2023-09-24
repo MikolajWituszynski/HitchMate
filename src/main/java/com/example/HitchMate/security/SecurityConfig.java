@@ -1,6 +1,6 @@
 package com.example.HitchMate.security;
 
-import com.example.HitchMate.services.MyDBUserDetailsService;
+import com.example.HitchMate.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
                 .requestMatchers("/markers/**","/users/**")
-                .hasRole("MARKER-OWNER")
+                .hasAuthority("ADMIN")
                 .and()
                 .csrf().disable()
                 .httpBasic();
@@ -37,7 +37,7 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new MyDBUserDetailsService(); // (1)
+        return new UserDetailsServiceImpl();
     }
 
 
