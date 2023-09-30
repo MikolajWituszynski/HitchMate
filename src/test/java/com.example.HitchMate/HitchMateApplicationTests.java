@@ -2,6 +2,7 @@ package com.example.HitchMate;
 
 import com.example.HitchMate.Entity.Marker;
 
+import com.example.HitchMate.Entity.Role;
 import com.example.HitchMate.Entity.User;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
@@ -22,9 +23,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -70,8 +69,9 @@ class HitchMateApplicationTests {
     @DirtiesContext
     void shouldCreateAMarkerWhenDataIsSend() {
         List<Marker> markers = new ArrayList<>();
-
-        User newUser = new User(null, "hank","abc123","test@test.pl", List.of("MARKER-OWNER"),null, null);
+        Set<Role> roles = new HashSet<>();
+        Role role = new Role(null,"ADMIN");
+        User newUser = new User(null, "hank","abc123","test@test.pl",roles,null,null, true);
 
 
         ResponseEntity<Void> createResponseForUser = restTemplate.withBasicAuth("hank","abc123").postForEntity("/users", newUser, Void.class);

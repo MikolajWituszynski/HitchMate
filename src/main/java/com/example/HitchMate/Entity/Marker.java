@@ -10,6 +10,7 @@ import java.util.List;
 public class Marker {
 
     @Id
+    @Column(name="marker_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -24,7 +25,7 @@ public class Marker {
     private String info;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id" , referencedColumnName = "id")
+    @JoinColumn(name="user_id" , referencedColumnName = "user_id")
     private User user;
 
     @OneToMany(mappedBy = "marker", cascade = CascadeType.ALL)

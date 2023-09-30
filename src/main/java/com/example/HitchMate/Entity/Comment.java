@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class Comment {
 
     @Id
+    @Column(name="comment_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -19,11 +20,11 @@ public class Comment {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id", referencedColumnName = "id")
+    @JoinColumn(name="user_id", referencedColumnName = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="marker_id", referencedColumnName = "id")
+    @JoinColumn(name="marker_id", referencedColumnName = "marker_id")
     private Marker marker;
 
     public Long getComment_id() {
