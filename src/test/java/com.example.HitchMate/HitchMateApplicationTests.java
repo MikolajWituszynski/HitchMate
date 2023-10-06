@@ -12,13 +12,15 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.jdbc.Sql;
+
 import java.net.URI;
 import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@Sql(scripts = "/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = "/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 class HitchMateApplicationTests {
 
     @Autowired
@@ -59,8 +61,7 @@ class HitchMateApplicationTests {
     void shouldCreateAMarkerWhenDataIsSend() {
         List<Marker> markers = new ArrayList<>();
         Set<Role> roles = new HashSet<>();
-        Role role = new Role(null,"ADMIN");
-        User newUser = new User(null, "hank","abc123","test@test.pl",roles,null,null, true);
+        User newUser = new User(null, "hank","abc123","test@test.pl",null,null);
 
 
         ResponseEntity<Void> createResponseForUser = restTemplate.withBasicAuth("hank","abc123").postForEntity("/users", newUser, Void.class);

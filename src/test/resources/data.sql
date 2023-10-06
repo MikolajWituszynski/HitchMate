@@ -1,4 +1,8 @@
 
-INSERT INTO users(id, username,password, email) VALUES (22,'sarah1', 'abc123', 'test@test');
+INSERT INTO users(username,password, email) VALUES ('sarah1', 'abc123', 'test@test');
 
-INSERT INTO markers(id, title, lat, lng, info, user_id) VALUES (1,'test', 12.00, 12.00, 'test', 22);
+INSERT INTO markers(title, lat, lng, info, user_id) VALUES ('test', 12.00, 12.00, 'test', 1);
+
+INSERT INTO roles(name) VALUES ('ADMIN');
+INSERT INTO roles(name) VALUES ('USER');
+INSERT INTO users_roles(user_id, role_id) VALUES(1,1);

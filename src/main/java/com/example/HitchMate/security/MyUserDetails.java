@@ -19,6 +19,7 @@ public class MyUserDetails implements UserDetails {
         this.user = user;
     }
 
+    // important for authorization
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<Role> roles = user.getRoles();
@@ -58,6 +59,6 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return user.isEnabled();
+        return true;
     }
 }
