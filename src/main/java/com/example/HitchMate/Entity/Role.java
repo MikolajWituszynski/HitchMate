@@ -13,7 +13,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToMany(mappedBy = "userRoles")
+
     Set<User> rolesByUser;
     public Role(Long id, String name) {
         this.id = id;
