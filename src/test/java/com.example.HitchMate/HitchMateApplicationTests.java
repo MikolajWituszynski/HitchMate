@@ -3,6 +3,7 @@ package com.example.HitchMate;
 import com.example.HitchMate.Entity.Marker;
 import com.example.HitchMate.Entity.Role;
 import com.example.HitchMate.Entity.User;
+import com.example.HitchMate.repositories.UserRepository;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,8 @@ class HitchMateApplicationTests {
 
     @Autowired
     TestRestTemplate restTemplate;
-
+    @Autowired
+    private UserRepository userRepository;
     @Test
     @DirtiesContext
     void shouldReturnAMarkerDataWhenDataIsSaved() {
@@ -60,22 +62,34 @@ class HitchMateApplicationTests {
     @DirtiesContext
     void shouldCreateAMarkerWhenDataIsSend() {
         List<Marker> markers = new ArrayList<>();
+
+        // Create a user without roles initially
+        User newUser = new User(null, "hank", "abc123", "test@test.pl", null, null);
+
+        // Register the user without roles
+        ResponseEntity<Void> createUserResponse = restTemplate.withBasicAuth("hank", "abc123").postForEntity("/users", newUser, Void.class);
+        assertThat(createUserResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+
+        // Retrieve the created user
+        User createdUser = userRepository.findByUsername("hank");
+
+        // Create roles and assign them to the user
+        Role adminRole = new Role(null, "ADMIN");
+        Role userRole = new Role(null, "USER");
         Set<Role> roles = new HashSet<>();
-        User newUser = new User(null, "hank","abc123","test@test.pl",null,null);
+        roles.add(adminRole);
+        roles.add(userRole);
+        createdUser.setRoles(roles);
+        userRepository.save(createdUser);
 
+        // Now create the marker associated with the user
+        Marker newMarker = new Marker(null, "test", 4.0, 5.0, "test", createdUser);
 
-        ResponseEntity<Void> createResponseForUser = restTemplate.withBasicAuth("hank","abc123").postForEntity("/users", newUser, Void.class);
-        System.out.println(createResponseForUser);
-        assertThat(createResponseForUser.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        // Create the marker
+        ResponseEntity<Void> createMarkerResponse = restTemplate.withBasicAuth("hank", "abc123").postForEntity("/markers", newMarker, Void.class);
+        assertThat(createMarkerResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
-
-        Marker newMarker = new Marker(null, "test", 4.0,5.0, "test",
-                newUser);
-
-        ResponseEntity<Void> createResponse = restTemplate.withBasicAuth("hank","abc123").postForEntity("/markers", newMarker, Void.class);
-        assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-
-        URI locationOfNewMarker = createResponse.getHeaders().getLocation();
+        URI locationOfNewMarker = createMarkerResponse.getHeaders().getLocation();
         ResponseEntity<String> getResponse = restTemplate
                 .withBasicAuth("hank", "abc123")
                 .getForEntity(locationOfNewMarker, String.class);
@@ -87,12 +101,12 @@ class HitchMateApplicationTests {
         Double lat = documentContext.read("$.lat");
         Double lng = documentContext.read("$.lng");
         String info = documentContext.read("$.info");
-        User user = documentContext.read("$.user_id");
-
+        User user = documentContext.read("$.user");
 
         assertThat(id).isNotNull();
-        assertThat(lat).isEqualTo(250.00);
+        assertThat(lat).isEqualTo(4.0); // Update the expected value here
     }
+
 
 
 
