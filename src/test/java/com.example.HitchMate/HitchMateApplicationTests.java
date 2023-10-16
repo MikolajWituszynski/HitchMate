@@ -7,13 +7,16 @@ import com.example.HitchMate.repositories.UserRepository;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URI;
 import java.util.*;
@@ -21,7 +24,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Sql(scripts = "/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 class HitchMateApplicationTests {
 
     @Autowired
@@ -31,15 +33,17 @@ class HitchMateApplicationTests {
     @Test
     @DirtiesContext
     void shouldReturnAMarkerDataWhenDataIsSaved() {
-        ResponseEntity<String> response = restTemplate.withBasicAuth("sarah1","abc123").getForEntity("/markers/2",String.class);
-        System.out.println(response.getBody());
+        ResponseEntity<String> response = restTemplate.withBasicAuth("sarah1","abc123").getForEntity("/markers/1",String.class);
+        String responseBody = response.getBody();
+        System.out.println("Response Body: " + responseBody);
+        DocumentContext documentContext = JsonPath.parse(responseBody);
+        System.out.println("Extracted marker_id: " + documentContext.read("$.marker_id"));
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        System.out.println(response.getBody());
-        DocumentContext documentContext = JsonPath.parse(response.getBody());
-        System.out.println(documentContext.toString());
-        Number id = documentContext.read("$.id");
-        assertThat(id).isEqualTo(2);
+        Number id = documentContext.read("$.marker_id");
+        assertThat(id).isEqualTo(1);
+        String title = documentContext.read("$.title");
+        assertThat(title).isEqualTo("title");
         Number lat = documentContext.read("$.lat");
         assertThat(lat).isEqualTo(12.0);
         Number lng = documentContext.read("$.lng");
