@@ -29,11 +29,8 @@ public class User {
     @Column(name="email")
     private String email;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Marker> markers = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Comment> comments = new ArrayList<>();
 
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -44,13 +41,12 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
-    public User(Long id, String username, String password, String email,  List<Marker> markers, List<Comment> comments) {
+    public User(Long id, String username, String password, String email,  List<Marker> markers) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.markers = markers;
-        this.comments = comments;
     }
 
 
@@ -86,7 +82,5 @@ public class User {
         return markers;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
+
 }

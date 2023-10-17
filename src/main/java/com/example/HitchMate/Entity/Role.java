@@ -18,7 +18,9 @@ public class Role {
         this.id = id;
         this.name = name;
     }
-
+    public Role() {
+        // Default constructor
+    }
     public Long getId() {
         return id;
     }

@@ -15,13 +15,12 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
-                .requestMatchers("/markers/**","/users/**")
-                .hasAnyAuthority("ADMIN","USERS")
-                .and()
-                .formLogin().permitAll()
-                .and()
+        http
                 .csrf().disable()
+                .authorizeHttpRequests()
+                .requestMatchers("/markers/**","/users/**")
+                .permitAll()
+                .and()
                 .httpBasic();
         return http.build();
     }

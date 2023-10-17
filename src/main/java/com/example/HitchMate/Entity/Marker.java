@@ -28,8 +28,6 @@ public class Marker {
     @JoinColumn(name="user_id" , referencedColumnName = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "marker", cascade = CascadeType.ALL)
-    private List<Comment> comments = new ArrayList<>();
 
 
 
@@ -69,9 +67,6 @@ public class Marker {
         this.user = user;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
 
     public Long getId() {
         return id;
