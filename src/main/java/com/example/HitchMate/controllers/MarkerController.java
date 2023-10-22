@@ -30,7 +30,7 @@ public class MarkerController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping
+    @GetMapping("/markers")
     ResponseEntity<List<Marker>> findAll() {
             List<Marker> allMarkers = markerRepository.findAll();
             return ResponseEntity.ok(allMarkers);

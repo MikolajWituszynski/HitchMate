@@ -18,7 +18,7 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/markers/**","/users/**")
+                .requestMatchers("/markers/**","/users/**","/h2-console/**")
                 .permitAll()
                 .and()
                 .httpBasic();
