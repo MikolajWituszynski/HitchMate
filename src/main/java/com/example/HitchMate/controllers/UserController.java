@@ -1,6 +1,5 @@
 package com.example.HitchMate.controllers;
 
-import com.example.HitchMate.Entity.Marker;
 import com.example.HitchMate.Entity.User;
 import com.example.HitchMate.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
