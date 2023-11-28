@@ -27,9 +27,6 @@ public class UserController {
     }
     @PostMapping("/register")
     public ResponseEntity<Void> registerUser(@RequestBody User newUser, UriComponentsBuilder ucb) {
-        // Your registration logic here, which may include saving the user to the database
-
-        // Replace the following with your actual registration logic.
         User savedUser = userRepository.save(newUser);
 
         URI locationOfNewUser = ucb.path("/register").build().toUri();
