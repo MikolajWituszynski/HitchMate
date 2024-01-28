@@ -9,9 +9,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-@CrossOrigin
+
 @RestController
 @RequestMapping(path="/users")
+@CrossOrigin(origins = "http://localhost:3000") // Allow requests from this origin
 public class UserController {
 
     @Autowired
@@ -29,9 +30,15 @@ public class UserController {
         URI locationOfNewUser = ucb.path("/register").build().toUri();
         return ResponseEntity.created(locationOfNewUser).build();
     }
-    @GetMapping("/username")
-    public ResponseEntity<User> findByUsername(@PathVariable String username) {
-        User foundUser = userRepository.findByUsername(username);
-        return ResponseEntity.ok(foundUser);
+    @GetMapping("/{id}")
+    public ResponseEntity<User> findById(@PathVariable Long id) {
+        User foundUser = userRepository.findById(id).orElse(null);
+        if (foundUser != null) {
+            return ResponseEntity.ok(foundUser);
+        } else {
+            // Return a 404 Not Found response if the user with the given ID is not found
+            return ResponseEntity.notFound().build();
+        }
     }
+
 }
