@@ -4,7 +4,6 @@ import com.example.HitchMate.Entity.User;
 import com.example.HitchMate.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -12,7 +11,7 @@ import java.net.URI;
 import java.util.List;
 @CrossOrigin
 @RestController
-@RequestMapping(value="/users")
+@RequestMapping(path="/users")
 public class UserController {
 
     @Autowired
@@ -27,7 +26,6 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<Void> registerUser(@RequestBody User newUser, UriComponentsBuilder ucb) {
         User savedUser = userRepository.save(newUser);
-
         URI locationOfNewUser = ucb.path("/register").build().toUri();
         return ResponseEntity.created(locationOfNewUser).build();
     }

@@ -2,18 +2,16 @@ package com.example.HitchMate.controllers;
 
 import com.example.HitchMate.Entity.Marker;
 import com.example.HitchMate.repositories.MarkerRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/markers")
+@RequestMapping(path = "/markers")
 public class MarkerController {
         private MarkerRepository markerRepository;
 
