@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path="/users")
-@CrossOrigin(origins = "http://localhost:3000") // Allow requests from this origin
+@CrossOrigin(origins = "http://localhost:3001") // Allow requests from this origin
 public class UserController {
 
     @Autowired
@@ -26,6 +26,7 @@ public class UserController {
     }
     @PostMapping("/register")
     public ResponseEntity<Void> registerUser(@RequestBody User newUser, UriComponentsBuilder ucb) {
+        System.out.println("Resgistering User....");
         User savedUser = userRepository.save(newUser);
         URI locationOfNewUser = ucb.path("/register").build().toUri();
         return ResponseEntity.created(locationOfNewUser).build();
@@ -33,6 +34,17 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id) {
         User foundUser = userRepository.findById(id).orElse(null);
+        if (foundUser != null) {
+            return ResponseEntity.ok(foundUser);
+        } else {
+            // Return a 404 Not Found response if the user with the given ID is not found
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<User> findByUserName(@PathVariable String username) {
+        User foundUser = userRepository.findByUsername(username);
         if (foundUser != null) {
             return ResponseEntity.ok(foundUser);
         } else {
