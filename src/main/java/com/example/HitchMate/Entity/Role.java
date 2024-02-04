@@ -1,35 +1,8 @@
 package com.example.HitchMate.Entity;
 
-import jakarta.persistence.*;
 
-import java.util.Set;
+public enum Role {
+    USER,
+    ADMIN
 
-@Entity
-@Table(name = "roles")
-public class Role {
-
-    @Id
-    @Column(name="role_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-
-    public Role(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-    public Role() {
-        // Default constructor
-    }
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
