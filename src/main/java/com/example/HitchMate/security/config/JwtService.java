@@ -18,10 +18,20 @@ import java.util.function.Function;
 @Service
 public class JwtService {
     private final static SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+
+    /**
+     * extracts the username from the provided JWT token. Subject claim typically contains the username or identifier
+     * associated with the user
+     **/
     public String extractUsername(String token) {
             return extractClaim(token, Claims::getSubject);
     }
 
+    /**
+     * extractAllClaims to retrieve the Claims from the JWT and store the result in the claims variable.
+     * in return Function<Claims,T> to apply the claimsResolver function to the claims object. The apply method is part of the Function
+     * interface and is responsible for executing the fucntion. The result is then returned.
+     **/
     public <T> T extractClaim(String token, Function<Claims,T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
