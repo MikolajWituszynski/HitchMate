@@ -1,4 +1,4 @@
-package com.example.HitchMate.security;
+package com.example.HitchMate.security.config;
 
 import com.example.HitchMate.Entity.Role;
 import com.example.HitchMate.Entity.User;

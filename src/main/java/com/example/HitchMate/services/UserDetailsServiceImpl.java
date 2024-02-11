@@ -2,7 +2,7 @@ package com.example.HitchMate.services;
 
 import com.example.HitchMate.Entity.User;
 import com.example.HitchMate.repositories.UserRepository;
-import com.example.HitchMate.security.MyUserDetails;
+import com.example.HitchMate.security.config.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
