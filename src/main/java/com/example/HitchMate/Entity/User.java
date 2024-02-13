@@ -65,14 +65,6 @@ public class User implements UserDetails {
     )
     private Set<Role> roles = new HashSet<>();
 
-    public User(Long id, String username, String password, String email,  List<Marker> markers) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.markers = markers;
-    }
-
 
     public User() {
 

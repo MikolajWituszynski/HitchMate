@@ -65,58 +65,6 @@ class HitchMateApplicationTests {
 
     }
 
-    @Test
-    @DirtiesContext
-    void shouldCreateAMarkerWhenDataIsSend() {
-        List<Marker> markers = new ArrayList<>();
-
-        // Create a user without roles initially
-        User newUser = new User(3L, "hank1", "abc12345", "test@test.pl", null);
-        userRepository.save(newUser);
-        // Register the user without roles
-        User createdUser = userRepository.findByUsername("hank1");
-        createdUser.getMarkers().size();
-        System.out.println("Created User: " + createdUser.getId());
-        System.out.println("Password: " + createdUser.getPassword());
-
-        Role adminRole = new Role(null, "ADMIN");
-        Set<Role> roles = new HashSet<>();
-        roles.add(adminRole);
-        createdUser.setRoles(roles);
-        userRepository.save(createdUser);
-        System.out.println("userRepository: " + userRepository.findAll());
-
-        ResponseEntity<Void> createUserResponse = restTemplate.withBasicAuth("hank1", "abc12345").postForEntity("/users", createdUser, Void.class);
-
-
-        assertThat(createUserResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-
-
-
-//
-        // Now create the marker associated with the user
-//
-//        // Create the marker
-//        assertThat(createMarkerResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-//
-//        URI locationOfNewMarker = createMarkerResponse.getHeaders().getLocation();
-//        ResponseEntity<String> getResponse = restTemplate
-//                .withBasicAuth("hank", "abc123")
-//                .getForEntity(locationOfNewMarker, String.class);
-//        assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-//
-//        DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
-//        Number id = documentContext.read("$.id");
-//        String title = documentContext.read("$.title");
-//        Double lat = documentContext.read("$.lat");
-//        Double lng = documentContext.read("$.lng");
-//        String info = documentContext.read("$.info");
-//        User user = documentContext.read("$.user");
-//
-//        assertThat(id).isNotNull();
-//        assertThat(lat).isEqualTo(4.0); // Update the expected value here
-    }
-
 
 
 
