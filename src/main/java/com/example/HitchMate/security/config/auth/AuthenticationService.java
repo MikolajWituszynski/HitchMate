@@ -1,12 +1,10 @@
 package com.example.HitchMate.security.config.auth;
 
-import com.example.HitchMate.Entity.Role;
 import com.example.HitchMate.repositories.UserRepository;
 import com.example.HitchMate.security.config.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.example.HitchMate.Entity.User;

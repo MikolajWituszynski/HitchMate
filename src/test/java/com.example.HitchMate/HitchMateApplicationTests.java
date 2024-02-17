@@ -1,8 +1,5 @@
 package com.example.HitchMate;
 
-import com.example.HitchMate.Entity.Marker;
-import com.example.HitchMate.Entity.Role;
-import com.example.HitchMate.Entity.User;
 import com.example.HitchMate.repositories.MarkerRepository;
 import com.example.HitchMate.repositories.UserRepository;
 import com.jayway.jsonpath.DocumentContext;
@@ -18,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)

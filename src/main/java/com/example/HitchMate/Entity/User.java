@@ -57,15 +57,13 @@ public class User implements UserDetails {
     private List<Marker> markers = new ArrayList<>();
 
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name= "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles = new HashSet<>();
+    public Role getRole() {
+        return role;
+    }
 
-
+    public void setRole(Role role) {
+        this.role = role;
+    }
     public User() {
 
     }
@@ -75,9 +73,6 @@ public class User implements UserDetails {
     }
 
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
 
     public String getUsername() {
         return username;
@@ -131,4 +126,7 @@ public class User implements UserDetails {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
+
 }
