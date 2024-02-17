@@ -8,8 +8,11 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.security.Key;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +20,10 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
+
+
     private final static SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+
 
     /**
      * extracts the username from the provided JWT token. Subject claim typically contains the username or identifier
@@ -76,7 +82,6 @@ public class JwtService {
     }
 
     private Key getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(String.valueOf(SECRET_KEY));
-        return Keys.hmacShaKeyFor(keyBytes);
+       return SECRET_KEY;
     }
 }

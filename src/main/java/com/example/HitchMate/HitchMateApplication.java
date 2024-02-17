@@ -9,6 +9,7 @@ public class HitchMateApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HitchMateApplication.class, args);
+
 	}
 
 }
